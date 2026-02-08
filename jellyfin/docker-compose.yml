@@ -1,0 +1,16 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    network_mode: bridge
+    ports:
+      - "8096:8096"
+      - "8920:8920"
+    environment:
+      TZ: Europe/Madrid
+      JELLYFIN_PublishedServerUrl: http://10.10.1.194:8096   # IP de linux.lan
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - /srv/media:/media
+    restart: unless-stopped

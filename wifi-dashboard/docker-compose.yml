@@ -1,0 +1,8 @@
+services:
+  wifi-dashboard:
+    build:
+      context: ./app
+    container_name: wifi-dashboard
+    ports:
+      - "8200:8200"
+    restart: unless-stopped

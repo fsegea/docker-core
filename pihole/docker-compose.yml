@@ -1,0 +1,28 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8080:80"     # Igual que en tu servidor real
+      # NO exponemos el puerto 53 para evitar interferencias
+    volumes:
+      - ./etc-pihole:/etc/pihole
+      - ./etc-dnsmasq.d:/etc/dnsmasq.d
+    cap_add:
+      - NET_ADMIN
+      - SYS_TIME
+      - SYS_NICE
+    networks:
+      red:
+        ipv4_address: 10.10.1.30   # MISMA IP que el servidor real
+    dns:
+      - 10.10.0.254
+      - 1.1.1.1
+    extra_hosts:
+      - "nodered.lan:10.10.1.5"
+
+networks:
+  red:
+    external: true

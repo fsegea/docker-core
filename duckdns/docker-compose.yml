@@ -1,0 +1,21 @@
+services:
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      PUID: ${PUID}
+      PGID: ${PGID}
+      SUBDOMAINS: ${DUCKDNS_SUBDOMAINS}
+      TOKEN: ${DUCKDNS_TOKEN}
+      LOG_FILE: "false"
+    volumes:
+      - ./config/resolv.conf:/etc/resolv.conf:rw
+    networks:
+      red:
+        ipv4_address: 10.10.1.9
+
+networks:
+  red:
+    external: true

@@ -1,0 +1,11 @@
+services:
+  rsyslog:
+    image: rsyslog/syslog_appliance_alpine
+    container_name: rsyslog
+    ports:
+      - "514:514/udp"
+      - "514:514/tcp"
+    volumes:
+      - /docker/core/wifi-dashboard/logs:/logs
+      - /docker/core/wifi-dashboard/rsyslog.conf:/etc/rsyslog.conf
+    restart: unless-stopped

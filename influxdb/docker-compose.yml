@@ -1,0 +1,17 @@
+services:
+  influxdb:
+    image: influxdb:1.8.10
+    container_name: influxdb
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./data:/var/lib/influxdb
+    networks:
+      red:
+        ipv4_address: 10.10.1.10
+
+networks:
+  red:
+    external: true

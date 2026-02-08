@@ -1,0 +1,21 @@
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Madrid
+      PUID: 1000
+      PGID: 1000
+    ports:
+      - "8500:80"
+      - "6443:443"
+    volumes:
+      - ./config:/config
+    networks:
+      red:
+        ipv4_address: 10.10.1.8
+
+networks:
+  red:
+    external: true

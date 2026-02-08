@@ -1,0 +1,16 @@
+services:
+  net-observer:
+    build:
+      context: ./app
+    container_name: net-observer
+    restart: unless-stopped
+    ports:
+      - "8100:8100"
+    environment:
+      FLASK_DEBUG: ${FLASK_DEBUG}
+      WINDOW_MINUTES: ${WINDOW_MINUTES}
+      THRESHOLD: ${THRESHOLD}
+      LOG_PATH: ${LOG_PATH}
+      ENVIRONMENT: ${ENVIRONMENT}
+    volumes:
+      - ./logs:/logs
